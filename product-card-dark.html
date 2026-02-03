@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pror3 新品发布</title>
+    <!-- Tailwind CSS v3 -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font Awesome -->
+    <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#000000',
+                        secondary: '#ffffff',
+                        accent: '#cccccc',
+                        dark: '#111111',
+                        darker: '#0a0a0a'
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'system-ui', 'sans-serif'],
+                    },
+                    animation: {
+                        'pulse-slow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                    }
+                }
+            }
+        }
+    </script>
+    <style type="text/tailwindcss">
+        @layer utilities {
+            .text-shadow {
+                text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+            }
+            .text-shadow-lg {
+                text-shadow: 0 0 20px rgba(255, 255, 255, 0.7);
+            }
+            .bg-gradient-black {
+                background: linear-gradient(135deg, #000000 0%, #111111 50%, #0a0a0a 100%);
+            }
+            .border-glow {
+                box-shadow: 0 0 5px rgba(255, 255, 255, 0.3);
+            }
+            .typing-cursor {
+                border-right: 2px solid #ffffff;
+                animation: blink 1s infinite;
+            }
+            @keyframes blink {
+                0%, 100% { border-color: transparent; }
+                50% { border-color: #ffffff; }
+            }
+            .feature-icon {
+                transition: transform 0.3s ease, color 0.3s ease;
+            }
+            .feature-item:hover .feature-icon {
+                transform: scale(1.1);
+                color: #ffffff;
+            }
+            .feature-text {
+                transition: color 0.3s ease;
+            }
+            .feature-item:hover .feature-text {
+                color: #ffffff;
+            }
+            .countdown-number {
+                transition: transform 0.3s ease;
+            }
+            .countdown-item:hover .countdown-number {
+                transform: scale(1.05);
+            }
+            .reservation-button {
+                position: relative;
+                overflow: hidden;
+                transition: transform 0.3s ease, box-shadow 0.3s ease;
+            }
+            .reservation-button:hover {
+                transform: translateY(-2px);
+                box-shadow: 0 0 15px rgba(255, 255, 255, 0.4);
+            }
+            .reservation-button::after {
+                content: '';
+                position: absolute;
+                top: 0;
+                left: -100%;
+                width: 100%;
+                height: 100%;
+                background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+                transition: left 0.5s ease;
+            }
+            .reservation-button:hover::after {
+                left: 100%;
+            }
+        }
+    </style>
+</head>
+<body class="bg-black text-white min-h-screen flex items-center justify-center p-4">
+    <!-- 鼠标跟随容器 -->
+    <div id="mouse-follow-container" class="fixed inset-0 pointer-events-none z-10"></div>
+
+    <!-- 产品发布卡片 -->
+    <div class="w-full max-w-3xl bg-gradient-black rounded-lg border border-gray-800 p-8 md:p-12 shadow-lg relative overflow-hidden">
+        <!-- 卡片背景装饰 -->
+        <div class="absolute top-0 right-0 w-64 h-64 bg-white/5 rounded-full blur-3xl -mr-32 -mt-32"></div>
+        <div class="absolute bottom-0 left-0 w-48 h-48 bg-white/5 rounded-full blur-3xl -ml-24 -mb-24"></div>
+        
+        <!-- 卡片内容 -->
+        <div class="relative z-10">
+            <!-- 标题区域 -->
+            <div class="text-center mb-12">
+                <h1 class="text-4xl md:text-6xl font-light mb-2">
+                    <span class="text-gray-400">新品</span>
+                    <span id="product-name" class="text-white text-shadow-lg">Pror3</span>
+                    <span class="typing-cursor ml-1 inline-block w-2 h-8 md:h-12 align-middle"></span>
+                </h1>
+                <p class="text-xl md:text-2xl text-gray-400 font-light">重新定义轻薄旗舰</p>
+            </div>
+            
+            <!-- 特性图标行 -->
+            <div class="grid grid-cols-3 gap-6 md:gap-10 mb-12">
+                <!-- 超轻特性 -->
+                <div class="feature-item text-center">
+                    <div class="feature-icon mx-auto w-12 h-12 md:w-16 md:h-16 flex items-center justify-center mb-3 text-gray-400">
+                        <i class="fa fa-feather text-2xl md:text-3xl"></i>
+                    </div>
+                    <p class="feature-text text-gray-500 text-sm md:text-base">超轻机身</p>
+                    <p class="text-xs text-gray-600 mt-1">仅 998g</p>
+                </div>
+                
+                <!-- 续航特性 -->
+                <div class="feature-item text-center">
+                    <div class="feature-icon mx-auto w-12 h-12 md:w-16 md:h-16 flex items-center justify-center mb-3 text-gray-400">
+                        <i class="fa fa-battery-full text-2xl md:text-3xl"></i>
+                    </div>
+                    <p class="feature-text text-gray-500 text-sm md:text-base">超长续航</p>
+                    <p class="text-xs text-gray-600 mt-1">20 小时</p>
+                </div>
+                
+                <!-- 摄像特性 -->
+                <div class="feature-item text-center">
+                    <div class="feature-icon mx-auto w-12 h-12 md:w-16 md:h-16 flex items-center justify-center mb-3 text-gray-400">
+                        <i class="fa fa-video-camera text-2xl md:text-3xl"></i>
+                    </div>
+                    <p class="feature-text text-gray-500 text-sm md:text-base">4K 摄像</p>
+                    <p class="text-xs text-gray-600 mt-1">专业级画质</p>
+                </div>
+            </div>
+            
+            <!-- 倒计时区域 -->
+            <div class="mb-10">
+                <p class="text-center text-gray-400 mb-4">预约倒计时</p>
+                <div class="flex justify-center space-x-4 md:space-x-8">
+                    <!-- 天 -->
+                    <div class="countdown-item text-center">
+                        <div class="countdown-number bg-dark rounded-md p-3 w-14 md:w-16 h-14 md:h-16 flex items-center justify-center border border-gray-800">
+                            <span id="days" class="text-2xl md:text-3xl font-light">03</span>
+                        </div>
+                        <p class="text-xs text-gray-500 mt-2">天</p>
+                    </div>
+                    
+                    <!-- 时 -->
+                    <div class="countdown-item text-center">
+                        <div class="countdown-number bg-dark rounded-md p-3 w-14 md:w-16 h-14 md:h-16 flex items-center justify-center border border-gray-800">
+                            <span id="hours" class="text-2xl md:text-3xl font-light">00</span>
+                        </div>
+                        <p class="text-xs text-gray-500 mt-2">时</p>
+                    </div>
+                    
+                    <!-- 分 -->
+                    <div class="countdown-item text-center">
+                        <div class="countdown-number bg-dark rounded-md p-3 w-14 md:w-16 h-14 md:h-16 flex items-center justify-center border border-gray-800">
+                            <span id="minutes" class="text-2xl md:text-3xl font-light">00</span>
+                        </div>
+                        <p class="text-xs text-gray-500 mt-2">分</p>
+                    </div>
+                    
+                    <!-- 秒 -->
+                    <div class="countdown-item text-center">
+                        <div class="countdown-number bg-dark rounded-md p-3 w-14 md:w-16 h-14 md:h-16 flex items-center justify-center border border-gray-800">
+                            <span id="seconds" class="text-2xl md:text-3xl font-light">00</span>
+                        </div>
+                        <p class="text-xs text-gray-500 mt-2">秒</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 预约按钮 -->
+            <div class="text-center">
+                <button id="reservation-btn" class="reservation-button bg-white text-black px-8 py-3 rounded-full font-medium hover:bg-gray-200 transition-all duration-300 animate-pulse-slow">
+                    立即预约
+                </button>
+                <p class="text-xs text-gray-600 mt-3">预约享优先购买权与专属优惠</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // 打字效果
+        const typingEffect = (element, words, typingSpeed = 100, pauseTime = 1000) => {
+            let wordIndex = 0;
+            let charIndex = 0;
+            let isDeleting = false;
+        
+            function type() {
+                const currentWord = words[wordIndex];
+            
+                if (isDeleting) {
+                    // 删除字符
+                    element.textContent = currentWord.substring(0, charIndex - 1);
+                    charIndex--;
+                } else {
+                    // 添加字符
+                    element.textContent = currentWord.substring(0, charIndex + 1);
+                    charIndex++;
+                }
+            
+                // 处理删除/添加状态转换
+                if (!isDeleting && charIndex === currentWord.length) {
+                    isDeleting = true;
+                    setTimeout(type, pauseTime); // 完成单词后暂停
+                } else if (isDeleting && charIndex === 0) {
+                    isDeleting = false;
+                    wordIndex = (wordIndex + 1) % words.length; // 循环切换单词
+                    setTimeout(type, 200); // 短暂暂停后开始新单词
+                } else {
+                    // 继续当前操作
+                    setTimeout(type, isDeleting ? typingSpeed/2 : typingSpeed);
+                }
+            }
+        
+            type(); // 启动动画
+        };
+
+        // 倒计时功能
+        const startCountdown = (targetDate) => {
+            const updateCountdown = () => {
+                const now = new Date().getTime();
+                const distance = targetDate - now;
+                
+                // 计算时间单位
+                const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+                
+                // 更新DOM
+                document.getElementById('days').textContent = days.toString().padStart(2, '0');
+                document.getElementById('hours').textContent = hours.toString().padStart(2, '0');
+                document.getElementById('minutes').textContent = minutes.toString().padStart(2, '0');
+                document.getElementById('seconds').textContent = seconds.toString().padStart(2, '0');
+                
+                // 倒计时结束
+                if (distance < 0) {
+                    clearInterval(countdownInterval);
+                    document.getElementById('days').textContent = '00';
+                    document.getElementById('hours').textContent = '00';
+                    document.getElementById('minutes').textContent = '00';
+                    document.getElementById('seconds').textContent = '00';
+                }
+            };
+            
+            // 立即执行一次
+            updateCountdown();
+            // 设置定时器每秒更新
+            const countdownInterval = setInterval(updateCountdown, 1000);
+        };
+
+        // 鼠标跟随效果
+        const mouseFollowEffect = () => {
+            const container = document.getElementById('mouse-follow-container');
+            let lastX = 0, lastY = 0;
+            const minDistance = 100; // 最小触发距离
+            const particles = [];
+            
+            document.addEventListener('mousemove', (e) => {
+                const currentX = e.clientX;
+                const currentY = e.clientY;
+                
+                // 计算与上次位置的距离
+                const distance = Math.sqrt(
+                    Math.pow(currentX - lastX, 2) + Math.pow(currentY - lastY, 2)
+                );
+                
+                // 如果移动距离足够大，创建新元素
+                if (distance > minDistance) {
+                    createFollowElement(currentX, currentY);
+                    lastX = currentX;
+                    lastY = currentY;
+                }
+            });
+            
+            function createFollowElement(x, y) {
+                const particle = document.createElement('div');
+                particle.className = 'absolute w-1 h-1 bg-white rounded-full opacity-0 transition-all duration-500';
+                particle.style.top = `${y}px`;
+                particle.style.left = `${x}px`;
+                
+                container.appendChild(particle);
+                
+                // 强制重排后添加动画
+                setTimeout(() => {
+                    particle.classList.add('opacity-100', 'scale-50');
+                    
+                    // 0.5秒后开始淡出
+                    setTimeout(() => {
+                        particle.classList.remove('opacity-100', 'scale-50');
+                        particle.classList.add('opacity-0', 'scale-0');
+                        
+                        // 动画完成后移除元素
+                        setTimeout(() => {
+                            if (container.contains(particle)) {
+                                container.removeChild(particle);
+                            }
+                        }, 500);
+                    }, 500);
+                }, 10);
+            }
+        };
+
+        // 预约按钮交互
+        const setupReservationButton = () => {
+            const button = document.getElementById('reservation-btn');
+            
+            button.addEventListener('click', () => {
+                // 添加点击效果
+                button.classList.add('scale-95');
+                setTimeout(() => {
+                    button.classList.remove('scale-95');
+                }, 150);
+                
+                // 显示预约成功提示
+                alert('预约成功！我们将在产品发布前通知您。');
+            });
+        };
+
+        // 页面加载完成后初始化
+        document.addEventListener('DOMContentLoaded', () => {
+            // 设置打字效果
+            typingEffect(
+                document.getElementById('product-name'),
+                ['Pror3', '轻薄旗舰', '未来科技'],
+                100,
+                1500
+            );
+            
+            // 设置倒计时（3天后）
+            const targetDate = new Date();
+            targetDate.setDate(targetDate.getDate() + 3);
+            targetDate.setHours(0, 0, 0, 0);
+            startCountdown(targetDate.getTime());
+            
+            // 初始化鼠标跟随效果
+            mouseFollowEffect();
+            
+            // 设置预约按钮交互
+            setupReservationButton();
+        });
+    </script>
+</body>
+</html>
